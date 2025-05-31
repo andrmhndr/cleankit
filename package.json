@@ -26,6 +26,10 @@
     "react": "^16.8 || ^17 || ^18",
     "react-dom": "^16.8 || ^17 || ^18"
   },
+    "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andrmhndr/andr-utils.git"
+  },
   "devDependencies": {
     "@types/react": "^19.1.6",
     "@types/react-dom": "^19.1.5"
