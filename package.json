@@ -1,18 +1,24 @@
 {
-  "name": "andr-dialog",
+  "name": "andr-utils",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "dist/index.cjs",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsup src/DialogContext.tsx --format cjs,esm --dts"
+    "build": "tsup src/index.tsx --format cjs,esm --dts"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "react",
+    "dialog",
+    "provider",
+    "utils"
+  ],
+  "author": "andrmhndr",
   "license": "ISC",
-  "description": "",
   "dependencies": {
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0",
     "tsup": "^8.5.0",
     "typescript": "^5.8.3"
   },
@@ -23,5 +29,8 @@
   "devDependencies": {
     "@types/react": "^19.1.6",
     "@types/react-dom": "^19.1.5"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
