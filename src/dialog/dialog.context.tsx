@@ -1,3 +1,4 @@
+"use client";
 import React, { createContext, useCallback, useState, FC } from "react";
 import {
   DialogContextType,

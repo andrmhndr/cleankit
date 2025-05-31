@@ -1,3 +1,4 @@
+'use client'
 import { useContext } from "react";
 import { DialogContextType } from "./dialog.interface";
 import { DialogContext } from "./dialog.context";
