@@ -1,47 +1,67 @@
-import "./dialog.css";
 import React, { createContext, useCallback, useState, FC } from "react";
+import styled from "@emotion/styled";
 import {
   DialogContextType,
   DialogProviderProps,
   Dialog,
 } from "./dialog.interface";
 
-/**
- * Global Dialog Context.
- * Provides centralized dialog control across the application.
- */
+// Styled components
+const Overlay = styled.div`
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+`;
+
+const DialogBox = styled.div`
+  background-color: white;
+  border-radius: 12px;
+  padding: 24px;
+  min-width: 320px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+`;
+
+const ButtonGroup = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 16px;
+  gap: 8px;
+`;
+
+const Button = styled.button<{ variant?: "ok" | "cancel" }>`
+  padding: 8px 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  background-color: ${({ variant }) =>
+    variant === "ok" ? "#0070f3" : "#aaa"};
+  color: white;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.9;
+  }
+`;
+
+// Context
 export const DialogContext = createContext<DialogContextType | undefined>(
   undefined
 );
 
-/**
- * DialogProvider component.
- * Must wrap your application to enable dialog functionality globally.
- *
- * @param children - Child components that can access dialog features via context.
- */
 export const DialogProvider: FC<DialogProviderProps> = ({ children }) => {
   const [dialogs, setDialogs] = useState<Dialog[]>([]);
 
-  /**
-   * Open a new dialog.
-   *
-   * @param dialog - The dialog configuration (without `id`). Accepts either static content or a function that receives a `resolve` callback.
-   * @returns A Promise that resolves when the dialog is closed.
-   */
   const openDialog = useCallback((dialog: Omit<Dialog, "id">): Promise<any> => {
-    const id = new Date().toISOString(); // unique-ish ID using timestamp
+    const id = new Date().toISOString();
     return new Promise((resolve) => {
       setDialogs((prev) => [...prev, { ...dialog, id, resolve }]);
     });
   }, []);
 
-  /**
-   * Close a dialog by its ID.
-   * If no ID is provided, it closes the last dialog in the stack.
-   *
-   * @param id - (Optional) ID of the dialog to close.
-   */
   const closeDialog = useCallback((id?: string) => {
     if (!id) {
       setDialogs((prev) => prev.slice(0, -1));
@@ -50,26 +70,14 @@ export const DialogProvider: FC<DialogProviderProps> = ({ children }) => {
     setDialogs((prev) => prev.filter((d) => d.id !== id));
   }, []);
 
-  /**
-   * Closes all currently open dialogs.
-   */
   const closeAllDialog = useCallback(() => {
     setDialogs([]);
   }, []);
 
-  /**
-   * Resolves a dialog by its ID and closes it.
-   * Calls the internal `resolve()` passed to `openDialog`.
-   *
-   * @param id - ID of the dialog to resolve
-   * @param result - The result passed back to the caller
-   */
   const resolveDialog = useCallback(
     (id: string, result: any) => {
       const dialog = dialogs.find((d) => d.id === id) as any;
-      if (dialog?.resolve) {
-        dialog.resolve(result);
-      }
+      if (dialog?.resolve) dialog.resolve(result);
       closeDialog(id);
     },
     [dialogs, closeDialog]
@@ -80,37 +88,33 @@ export const DialogProvider: FC<DialogProviderProps> = ({ children }) => {
       {children}
 
       {dialogs.map((dialog) => (
-        <div
+        <Overlay
           key={dialog.id}
-          className="dialog-overlay"
           onClick={() => resolveDialog(dialog.id, null)}
         >
-          <div
-            onClick={(e) => e.stopPropagation()}
-            className="dialog-container"
-          >
+          <DialogBox onClick={(e) => e.stopPropagation()}>
             {typeof dialog.content === "function"
               ? dialog.content((result: any) =>
                   resolveDialog(dialog.id, result)
                 )
               : dialog.content ?? (
-                  <div className="dialog-buttons">
-                    <button
+                  <ButtonGroup>
+                    <Button
                       onClick={() => resolveDialog(dialog.id, true)}
-                      className="dialog-button-ok"
+                      variant="ok"
                     >
                       OK
-                    </button>
-                    <button
+                    </Button>
+                    <Button
                       onClick={() => resolveDialog(dialog.id, false)}
-                      className="dialog-button-cancel"
+                      variant="cancel"
                     >
                       Cancel
-                    </button>
-                  </div>
+                    </Button>
+                  </ButtonGroup>
                 )}
-          </div>
-        </div>
+          </DialogBox>
+        </Overlay>
       ))}
     </DialogContext.Provider>
   );

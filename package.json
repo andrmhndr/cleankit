@@ -1,6 +1,6 @@
 {
   "name": "andr-utils",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "main": "dist/index.cjs",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
@@ -19,6 +19,8 @@
   "author": "andrmhndr",
   "license": "ISC",
   "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
     "tsup": "^8.5.0",
     "typescript": "^5.8.3"
   },
