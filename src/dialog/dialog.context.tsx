@@ -1,4 +1,4 @@
-"use client";
+import "./dialog.css";
 import React, { createContext, useCallback, useState, FC } from "react";
 import {
   DialogContextType,
@@ -82,28 +82,28 @@ export const DialogProvider: FC<DialogProviderProps> = ({ children }) => {
       {dialogs.map((dialog) => (
         <div
           key={dialog.id}
-          className="fixed inset-0 z-[999] flex items-center justify-center backdrop-blur-sm bg-black/40 transition-opacity duration-300 animate-fadeIn"
+          className="dialog-overlay"
           onClick={() => resolveDialog(dialog.id, null)}
         >
           <div
             onClick={(e) => e.stopPropagation()}
-            className="bg-white p-6 rounded-2xl shadow-2xl transform transition-all duration-300 scale-95 animate-dialogIn"
+            className="dialog-container"
           >
             {typeof dialog.content === "function"
               ? dialog.content((result: any) =>
                   resolveDialog(dialog.id, result)
                 )
               : dialog.content ?? (
-                  <div className="flex justify-end gap-2">
+                  <div className="dialog-buttons">
                     <button
                       onClick={() => resolveDialog(dialog.id, true)}
-                      className="mt-4 px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors"
+                      className="dialog-button-ok"
                     >
                       OK
                     </button>
                     <button
                       onClick={() => resolveDialog(dialog.id, false)}
-                      className="mt-4 px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors"
+                      className="dialog-button-cancel"
                     >
                       Cancel
                     </button>
