@@ -14,19 +14,35 @@ interface DialogProviderProps {
     children: ReactNode;
 }
 
-/**
- * Global Dialog Context.
- * Provides centralized dialog control across the application.
- */
 declare const DialogContext: React.Context<DialogContextType>;
-/**
- * DialogProvider component.
- * Must wrap your application to enable dialog functionality globally.
- *
- * @param children - Child components that can access dialog features via context.
- */
 declare const DialogProvider: FC<DialogProviderProps>;
 
 declare const useDialog: () => DialogContextType;
 
-export { type Dialog, DialogContext, type DialogContextType, DialogProvider, type DialogProviderProps, useDialog };
+type Func = (...args: any[]) => void;
+
+declare function debounce<F extends Func>(func: F, wait: number): (this: any, ...args: Parameters<F>) => void;
+
+type QueryParamsInterface = Record<string, string | number | null | undefined>;
+
+declare const useQueryParamsNext: <K extends string = string>() => {
+    getAll: () => Record<string, string>;
+    getOne: (key: K) => string | null;
+    setQuery: (param?: Partial<Record<K, QueryParamsInterface[K]>>, options?: {
+        debounce?: number;
+    }) => void;
+    removeQuery: (...keys: K[]) => void;
+    clearQuery: () => void;
+};
+
+declare const useQueryParamsReact: <K extends string = string>() => {
+    getAll: () => Record<string, string>;
+    getOne: (key: K) => string | null;
+    setQuery: (param?: Partial<Record<K, QueryParamsInterface[K]>>, options?: {
+        debounce?: number;
+    }) => void;
+    removeQuery: (...keys: K[]) => void;
+    clearQuery: () => void;
+};
+
+export { type Dialog, DialogContext, type DialogContextType, DialogProvider, type DialogProviderProps, type Func, type QueryParamsInterface, debounce, useDialog, useQueryParamsNext, useQueryParamsReact };
