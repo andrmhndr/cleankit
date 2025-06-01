@@ -21,8 +21,14 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: List files after install
+        run: ls -la
+
       - name: Build (optional)
         run: npm run build || echo "No build step"
+
+      - name: List files after build
+        run: ls -la dist # Adjust if your build folder is different
 
       - name: Publish to NPM
         run: npm publish
