@@ -1,9 +1,14 @@
 import { useRef } from "react";
 import { useRouter } from "next/router";
 import { debounce } from "../../debounce/debounce";
-import { QueryParamsInterface } from "../query-params.interface";
+import {
+  QueryParamsInterface,
+  UseQueryInterface,
+} from "../query-params.interface";
 
-export const useQueryParamsNext = <K extends string = string>() => {
+export const useQueryParamsNext = <
+  K extends string = string
+>(): UseQueryInterface<K> => {
   const router = useRouter();
   const debounceMap = useRef<
     Record<number, (param: Partial<Record<K, QueryParamsInterface[K]>>) => void>
