@@ -7,4 +7,5 @@ export default defineConfig({
   outDir: "dist",
   clean: true,
   target: "esnext",
+  external: ["fs", "path", "os", "next/router", "react-router-dom"],
 });
