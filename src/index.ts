@@ -15,6 +15,4 @@ export * from "./debounce/debounce.interface";
  * query params
  */
 export * from "./query-params/query-params.interface";
-export * from "./query-params/next/useQueryParams.hook.next";
-export * from "./query-params/react/useQueryParams.hook.react";
 export * from "./query-params/useQueryParams.hook";
