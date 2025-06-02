@@ -1,7 +1,7 @@
 {
   "name": "@andrmhndr/cleankit",
   "description": "A lightweight React utility kit for clean dialogs, providers, and parameter handling.",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "type": "module",
   "main": "dist/index.cjs",
   "module": "dist/index.mjs",
@@ -22,9 +22,7 @@
   "license": "MIT",
   "peerDependencies": {
     "react": "^16.8 || ^17 || ^18",
-    "react-dom": "^16.8 || ^17 || ^18",
-    "next": "^13.5.11",
-    "react-router-dom": "^6.12.1"
+    "react-dom": "^16.8 || ^17 || ^18"
   },
   "dependencies": {},
   "sideEffects": false,
