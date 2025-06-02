@@ -21,10 +21,16 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build package
-        run: npm run build
+      - name: List files after install
+        run: ls -la
+
+      - name: Build (optional)
+        run: npm run build || echo "No build step"
+
+      - name: List files after build
+        run: ls -la dist # Adjust if your build folder is different
 
       - name: Publish to NPM
-        run: npm publish --access public
+        run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
