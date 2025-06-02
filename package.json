@@ -1,5 +1,5 @@
 {
-  "name": "@andr/cleankit",
+  "name": "@andrmhndr/cleankit",
   "description": "A lightweight React utility kit for clean dialogs, providers, and parameter handling.",
   "version": "0.0.2",
   "type": "module",
