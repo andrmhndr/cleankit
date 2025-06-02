@@ -1,9 +1,9 @@
 {
   "name": "@andrmhndr/cleankit",
   "description": "A lightweight React utility kit for clean dialogs, providers, and parameter handling.",
-  "version": "0.0.13",
-  "type": "module",
+  "version": "0.0.14",
   "main": "dist/index.cjs",
+  "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "exports": {
     ".": {
