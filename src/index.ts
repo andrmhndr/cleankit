@@ -1,18 +1,14 @@
 /**
- * dialog
- */
-export * from "./dialog/dialog.context";
-export * from "./dialog/useDialog.hook";
-export * from "./dialog/dialog.interface";
-
-/**
  * debounce
  */
-export * from "./debounce/debounce";
-export * from "./debounce/debounce.interface";
+export * from "./global/debounce/debounce";
+export * from "./global/debounce/debounce.interface";
 
 /**
- * query params
+ * dialog
  */
-export * from "./query-params/query-params.interface";
-export * from "./query-params/useQueryParams.hook";
+export * from "./global/dialog/dialog.context";
+export * from "./global/dialog/dialog.interface";
+export * from "./global/dialog/useDialog.hook";
+
+export * from "./global/query-params/query-params.interface";

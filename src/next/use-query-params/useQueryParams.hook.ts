@@ -1,12 +1,12 @@
 import { useRef } from "react";
 import { useRouter } from "next/router";
-import { debounce } from "../../debounce/debounce";
+import { debounce } from "../../global/debounce/debounce";
 import {
   QueryParamsInterface,
   UseQueryInterface,
-} from "../query-params.interface";
+} from "../../global/query-params/query-params.interface";
 
-export const useQueryParamsNext = <
+export const useQueryParams = <
   K extends string = string
 >(): UseQueryInterface<K> => {
   const router = useRouter();
