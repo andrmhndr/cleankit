@@ -21,16 +21,19 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: List files after install
-        run: ls -la
+      - name: Verify tag matches version
+        run: |
+          TAG_VERSION=${GITHUB_REF#refs/tags/v}
+          PACKAGE_VERSION=$(node -p "require('./package.json').version")
+          if [ "$TAG_VERSION" != "$PACKAGE_VERSION" ]; then
+            echo "❌ Tag ($TAG_VERSION) doesn't match package.json version ($PACKAGE_VERSION)"
+            exit 1
+          fi
 
-      - name: Build (optional)
-        run: npm run build || echo "No build step"
-
-      - name: List files after build
-        run: ls -la dist # Adjust if your build folder is different
+      - name: Build package
+        run: npm run build
 
       - name: Publish to NPM
-        run: npm publish
+        run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

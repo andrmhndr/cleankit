@@ -1,9 +1,17 @@
 {
   "name": "@andr/cleankit",
+  "description": "A lightweight React utility kit for clean dialogs, providers, and parameter handling.",
   "version": "0.0.1",
   "main": "dist/index.cjs",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs",
+      "types": "./dist/index.d.ts"
+    }
+  },
   "files": [
     "dist"
   ],
@@ -17,15 +25,12 @@
     "utils"
   ],
   "author": "andrmhndr",
-  "license": "ISC",
+  "license": "MIT",
   "peerDependencies": {
     "react": "^16.8 || ^17 || ^18",
     "react-dom": "^16.8 || ^17 || ^18"
   },
-  "optionalDependencies": {
-    "next": "^13.0.0",
-    "react-router-dom": "^6.0.0"
-  },
+  "sideEffects": false,
   "devDependencies": {
     "@types/node": "^22.15.29",
     "@types/react": "^19.1.6",
@@ -43,5 +48,9 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "homepage": "https://github.com/andrmhndr/cleankit#readme",
+  "bugs": {
+    "url": "https://github.com/andrmhndr/cleankit/issues"
   }
 }
