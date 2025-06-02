@@ -1,7 +1,7 @@
 {
   "name": "@andrmhndr/cleankit",
   "description": "A lightweight React utility kit for clean dialogs, providers, and parameter handling.",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "type": "module",
   "main": "dist/index.cjs",
   "module": "dist/index.mjs",
@@ -12,12 +12,14 @@
       "require": "./dist/index.cjs"
     },
     "./next": {
-      "import": "./dist/next.mjs",
-      "require": "./dist/next.cjs"
+      "import": "./dist/next/index.mjs",
+      "require": "./dist/next/index.cjs",
+      "types": "./dist/next/index.d.ts"
     },
     "./react": {
-      "import": "./dist/react.mjs",
-      "require": "./dist/react.cjs"
+      "import": "./dist/react/index.mjs",
+      "require": "./dist/react/index.cjs",
+      "types": "./dist/react/index.d.ts"
     }
   },
   "files": [

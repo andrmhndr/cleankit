@@ -1,18 +1,8 @@
 import { defineConfig } from "tsup";
 
 export default defineConfig({
-  entry: {
-    index: "src/index.ts", // universal, optional
-    next: "src/next/index.ts",
-    react: "src/react/index.ts",
-  },
-  dts: {
-    entry: {
-      index: "src/index.ts",
-      next: "src/next/index.ts",
-      react: "src/react/index.ts",
-    },
-  },
+  entry: ["src/index.ts", "src/next/index.ts", "src/react/index.ts"],
+  dts: true,
   format: ["esm", "cjs"],
   outDir: "dist",
   clean: true,
