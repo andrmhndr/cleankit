@@ -90,10 +90,13 @@ export const DialogProvider: FC<DialogProviderProps> = ({ children }) => {
       {dialogs.map((dialog) => (
         <div
           key={dialog.id}
-          style={dialog.content ? null : overlayStyle}
+          style={overlayStyle}
           onClick={() => resolveDialog(dialog.id, null)}
         >
-          <div style={dialogBoxStyle} onClick={(e) => e.stopPropagation()}>
+          <div
+            style={dialog.content ? null : dialogBoxStyle}
+            onClick={(e) => e.stopPropagation()}
+          >
             {typeof dialog.content === "function"
               ? dialog.content((result: any) =>
                   resolveDialog(dialog.id, result)
