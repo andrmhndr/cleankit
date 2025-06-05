@@ -12,3 +12,5 @@ export * from "./global/dialog/dialog.interface";
 export * from "./global/dialog/useDialog.hook";
 
 export * from "./global/query-params/query-params.interface";
+
+export * from "./global/cleaner";

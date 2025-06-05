@@ -6,15 +6,30 @@ import {
   UseQueryInterface,
 } from "../../global/query-params/query-params.interface";
 
+/**
+ * Custom hook to manage URL query parameters in a flexible way.
+ * Designed for Next.js (pages router).
+ *
+ * Supports reading, adding, removing, and clearing query parameters,
+ * with optional debounce for smoother UX during fast input changes.
+ *
+ * @returns {UseQueryInterface} API to interact with query parameters
+ */
 export const useQueryParams = <
   K extends string = string
 >(): UseQueryInterface<K> => {
   const router = useRouter();
+
+  // Holds debounced update functions based on delay values
   const debounceMap = useRef<
     Record<number, (param: Partial<Record<K, QueryParamsInterface[K]>>) => void>
   >({});
 
-  // Ambil semua query param sebagai string record
+  /**
+   * Retrieves all current query parameters as string key-value pairs.
+   *
+   * @returns {Record<string, string>} All query parameters
+   */
   const getAll = (): Record<string, string> => {
     const query = router.query;
     const result: Record<string, string> = {};
@@ -22,13 +37,18 @@ export const useQueryParams = <
       if (typeof value === "string") {
         result[key] = value;
       } else if (Array.isArray(value)) {
-        result[key] = value.join(","); // fallback kalau array, gabungkan jadi string
+        result[key] = value.join(","); // Fallback: join array as string
       }
     });
     return result;
   };
 
-  // Ambil satu query param sesuai key generic
+  /**
+   * Retrieves the value of a single query parameter by key.
+   *
+   * @param key - The query parameter name
+   * @returns {string | null} Value or null if not found
+   */
   const getOne = (key: K): string | null => {
     const value = router.query[key];
     if (!value) return null;
@@ -37,7 +57,10 @@ export const useQueryParams = <
     return null;
   };
 
-  // Update query param tanpa reload page (replaceState)
+  /**
+   * Updates query parameters directly without debounce.
+   * (Private method used internally)
+   */
   const rawUpdate = (param: Partial<Record<K, QueryParamsInterface[K]>>) => {
     const currentQuery = { ...router.query };
 
@@ -59,7 +82,12 @@ export const useQueryParams = <
     );
   };
 
-  // setQuery dengan debounce opsional
+  /**
+   * Sets or updates query parameters, with optional debounce for delay.
+   *
+   * @param param - Object with query key-value pairs to update
+   * @param options - Optional debounce delay in milliseconds
+   */
   const setQuery = (
     param: Partial<Record<K, QueryParamsInterface[K]>> = {},
     options: { debounce?: number } = {}
@@ -76,7 +104,11 @@ export const useQueryParams = <
     }
   };
 
-  // Remove query keys
+  /**
+   * Removes one or more query parameters from the URL.
+   *
+   * @param keys - Names of the parameters to remove
+   */
   const removeQuery = (...keys: K[]) => {
     const currentQuery = { ...router.query };
     keys.forEach((key) => {
@@ -92,7 +124,9 @@ export const useQueryParams = <
     );
   };
 
-  // Clear semua query params
+  /**
+   * Clears all query parameters from the URL.
+   */
   const clearQuery = () => {
     router.replace(
       {

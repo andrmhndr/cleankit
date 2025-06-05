@@ -11,7 +11,7 @@ Features
 - Handy utility functions for common tasks
 - Lightweight and fast
 - TypeScript support out of the box
-- Compatible with React and Node.js environments
+- Compatible with React and next.js environments
 - Modular: import only what you need
 
 ---
@@ -40,7 +40,7 @@ Let's make this utility library even better together! 🚀
 
 Contact
 
-Built with passion by Andra — let’s connect!
+Built with passion by Andrmhndr — let’s connect!
 
 - GitHub: [andrmhndr](https://github.com/andrmhndr)
 - Email: gandrainsan@yahoo.com

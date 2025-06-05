@@ -6,6 +6,9 @@ import {
   UseQueryInterface,
 } from "../../global/query-params/query-params.interface";
 
+/**
+ * A custom hook to manage query parameters in React Router with optional debouncing.
+ */
 export const useQueryParams = <
   K extends string = string
 >(): UseQueryInterface<K> => {
@@ -15,8 +18,12 @@ export const useQueryParams = <
     Record<number, (param: Partial<Record<K, QueryParamsInterface[K]>>) => void>
   >({});
 
+  // Get URLSearchParams from the current location
   const getSearchParams = () => new URLSearchParams(location.search);
 
+  /**
+   * Get all query parameters as a key-value object.
+   */
   const getAll = (): Record<string, string> => {
     const params = getSearchParams();
     const result: Record<string, string> = {};
@@ -26,10 +33,14 @@ export const useQueryParams = <
     return result;
   };
 
-  // Generic getOne, bisa ketik key yang pasti
+  /**
+   * Get the value of a specific query parameter.
+   */
   const getOne = (key: K): string | null => getSearchParams().get(key);
 
-  // rawUpdate juga pakai partial record untuk key generic
+  /**
+   * Update query parameters without reloading the page.
+   */
   const rawUpdate = (param: Partial<Record<K, QueryParamsInterface[K]>>) => {
     const params = getSearchParams();
 
@@ -44,7 +55,9 @@ export const useQueryParams = <
     navigate(`${location.pathname}?${params.toString()}`, { replace: true });
   };
 
-  // setQuery pakai generic key dan optional debounce
+  /**
+   * Set or update query parameters with optional debounce.
+   */
   const setQuery = (
     param: Partial<Record<K, QueryParamsInterface[K]>> = {},
     options: { debounce?: number } = {}
@@ -61,12 +74,18 @@ export const useQueryParams = <
     }
   };
 
+  /**
+   * Remove specific query parameters by keys.
+   */
   const removeQuery = (...keys: K[]) => {
     const params = getSearchParams();
     keys.forEach((key) => params.delete(key));
     navigate(`${location.pathname}?${params.toString()}`, { replace: true });
   };
 
+  /**
+   * Clear all query parameters.
+   */
   const clearQuery = () => {
     navigate(location.pathname, { replace: true });
   };

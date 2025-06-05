@@ -11,7 +11,9 @@ import {
   Dialog,
 } from "./dialog.interface";
 
-// Inline styles
+/**
+ * Styling for the overlay background when a dialog is active.
+ */
 const overlayStyle: CSSProperties = {
   position: "fixed",
   inset: "0",
@@ -22,6 +24,9 @@ const overlayStyle: CSSProperties = {
   zIndex: 1000,
 };
 
+/**
+ * Basic style for the dialog container.
+ */
 const dialogBoxStyle: CSSProperties = {
   backgroundColor: "white",
   borderRadius: "12px",
@@ -30,6 +35,9 @@ const dialogBoxStyle: CSSProperties = {
   boxShadow: "0 8px 32px rgba(0, 0, 0, 0.2)",
 };
 
+/**
+ * Button group styling within the dialog.
+ */
 const buttonGroupStyle: CSSProperties = {
   display: "flex",
   justifyContent: "flex-end",
@@ -37,6 +45,10 @@ const buttonGroupStyle: CSSProperties = {
   gap: "8px",
 };
 
+/**
+ * Dynamic styling for OK and Cancel buttons.
+ * @param variant - Button type ("ok" or "cancel")
+ */
 const buttonStyle = (variant: "ok" | "cancel" = "cancel"): CSSProperties => ({
   padding: "8px 16px",
   fontWeight: "bold",
@@ -48,13 +60,26 @@ const buttonStyle = (variant: "ok" | "cancel" = "cancel"): CSSProperties => ({
   transition: "opacity 0.2s",
 });
 
+/**
+ * Context to manage dialog interactions. Provides functions to open, close, and manage dialogs.
+ */
 export const DialogContext = createContext<DialogContextType | undefined>(
   undefined
 );
 
+/**
+ * DialogProvider component that manages and renders dialogs globally.
+ * Wrap this around your app to enable the dialog system.
+ *
+ * @param children - React children to be rendered inside the provider.
+ */
 export const DialogProvider: FC<DialogProviderProps> = ({ children }) => {
   const [dialogs, setDialogs] = useState<Dialog[]>([]);
 
+  /**
+   * Opens a new dialog and returns a promise that resolves when the dialog is closed.
+   * @param dialog - The dialog to open (excluding the ID).
+   */
   const openDialog = useCallback((dialog: Omit<Dialog, "id">): Promise<any> => {
     const id = new Date().toISOString();
     return new Promise((resolve) => {
@@ -62,6 +87,10 @@ export const DialogProvider: FC<DialogProviderProps> = ({ children }) => {
     });
   }, []);
 
+  /**
+   * Closes a specific dialog by ID, or closes the most recent dialog if no ID is provided.
+   * @param id - The ID of the dialog to close.
+   */
   const closeDialog = useCallback((id?: string) => {
     if (!id) {
       setDialogs((prev) => prev.slice(0, -1));
@@ -70,10 +99,18 @@ export const DialogProvider: FC<DialogProviderProps> = ({ children }) => {
     setDialogs((prev) => prev.filter((d) => d.id !== id));
   }, []);
 
+  /**
+   * Closes all active dialogs.
+   */
   const closeAllDialog = useCallback(() => {
     setDialogs([]);
   }, []);
 
+  /**
+   * Resolves a dialog with the given result and closes it.
+   * @param id - ID of the dialog to resolve.
+   * @param result - Value to return to the caller via the promise.
+   */
   const resolveDialog = useCallback(
     (id: string, result: any) => {
       const dialog = dialogs.find((d) => d.id === id) as any;
@@ -87,6 +124,7 @@ export const DialogProvider: FC<DialogProviderProps> = ({ children }) => {
     <DialogContext.Provider value={{ openDialog, closeDialog, closeAllDialog }}>
       {children}
 
+      {/* Render all active dialogs */}
       {dialogs.map((dialog) => (
         <div
           key={dialog.id}
