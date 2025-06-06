@@ -31,7 +31,6 @@ yarn add @andrmhndr/cleankit
 ### Setup
 
 ```tsx
-// _app.tsx
 import { DialogProvider } from "@andrmhndr/cleankit";
 
 export default function App({ Component, pageProps }) {
@@ -77,7 +76,7 @@ const MyComponent = () => {
 Manage URL query params with ease (works with Next.js and React Router).
 
 ```tsx
-import { useQueryParams } from "@andrmhndr/cleankit";
+import { useQueryParams } from "@andrmhndr/cleankit/react";
 
 const { getOne, setQuery, removeQuery, clearQuery } = useQueryParams();
 
@@ -130,7 +129,7 @@ Clean out unwanted values from data objects and arrays.
 Removes `null`, `undefined`, and empty string `""` values from an object.
 
 ```ts
-import { cleanObject } from "@andrmhndr/cleankit";
+import { cleanObject } from "@andrmhndr/cleankit/server";
 
 const cleaned = cleanObject({
   name: "Felicia",
@@ -146,7 +145,7 @@ const cleaned = cleanObject({
 Removes `null`, `undefined`, empty strings `""`, and empty arrays `[]`. Optionally inserts a spacer between items.
 
 ```ts
-import { cleanList } from "@andrmhndr/cleankit";
+import { cleanList } from "@andrmhndr/cleankit/server";
 
 const cleaned = cleanList([null, "React", "", [], "Next.js", undefined]);
 // => ["React", "Next.js"]
