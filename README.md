@@ -108,14 +108,16 @@ log("Hello world");
 ## 📅 formatDate
 
 ```ts
-import { formatDate } from "@andrmhndr/cleankit";
+import { formatDate } from "@andrmhndr/cleankit/server";
 
-formatDate(new Date()); // default
-formatDate(new Date(), { style: "short" });
-formatDate(new Date(), {
-  locale: "id-ID",
-  format: "EEEE, dd MMM yyyy",
-});
+
+dateFormatter("2023-12-25T14:30:00", { format: "dd MMMM yyyy HH:mm" })
+dateFormatter(new Date(), {
+  format: "EEEE, d MMM yyyy hh:mm a",
+  dayNamesFull: ["Minggu", "Senin", ...],
+  monthNames: ["Januari", "Februari", ...],
+  amPmLabels: ["pagi", "malam"]
+})
 ```
 
 ---
