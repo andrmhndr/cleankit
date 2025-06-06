@@ -1,7 +1,7 @@
 {
   "name": "@andrmhndr/cleankit",
   "description": "A lightweight React utility kit for those who want to be clean.",
-  "version": "0.0.22",
+  "version": "0.0.23",
   "main": "dist/index.cjs",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
@@ -10,6 +10,11 @@
       "import": "./dist/index.mjs",
       "require": "./dist/index.cjs",
       "types": "./dist/index.d.ts"
+    },
+    "./server": {
+      "import": "./dist/server/index.mjs",
+      "require": "./dist/server/index.cjs",
+      "types": "./dist/server/index.d.ts"
     },
     "./react": {
       "import": "./dist/react/index.mjs",
