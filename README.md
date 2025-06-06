@@ -161,4 +161,4 @@ const spaced = cleanList(["A", "B", "C"], (i) => <hr key={i} />);
 ## 📖 License
 
 MIT — Use it, love it, and make something beautiful.  
-And remember... **clean code is sexy code** 😘
+And remember... **Keep pushin' your self up!**
