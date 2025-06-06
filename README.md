@@ -1,59 +1,163 @@
+# 🧼 @andrmhndr/cleankit
 
-andr-utils
+A beautifully structured utility kit for React & Next.js projects. Includes global dialogs, query param management, debouncing, date formatting, and object/list cleaning helpers.
 
-A versatile and lightweight utility library designed to simplify your JavaScript/TypeScript development experience.
-Crafted by Andrmhndr 
-
----
-
-Features
-
-- Handy utility functions for common tasks
-- Lightweight and fast
-- TypeScript support out of the box
-- Compatible with React and next.js environments
-- Modular: import only what you need
+> Made for developers who care about **clean code**, **efficiency**, and a little bit of magic ✨
 
 ---
 
-Installation
+## 📦 Installation
 
-npm install andr-utils
+```bash
+npm install @andrmhndr/cleankit
 # or
-yarn add andr-utils
+yarn add @andrmhndr/cleankit
+```
 
 ---
 
-Available Functions
+## 📚 Features
 
-- DialogProvider - a wrapper to so you can use useDialog
-- useDialog - an hook to call openDialog() 
-
----
-
-Contributing
-
-Feel free to open issues or submit pull requests.
-Let's make this utility library even better together! 🚀
+- 🧠 **DialogProvider** — Promise-based global modals.
+- 🔍 **useQueryParams** — Easy query param management.
+- 🕒 **debounce** — Lightweight function throttling.
+- 📅 **formatDate** — Date formatting with locale support.
+- 🧹 **cleanObject & cleanList** — Remove noise from objects and arrays.
 
 ---
 
-Contact
+## 🔘 DialogProvider
 
-Built with passion by Andrmhndr — let’s connect!
+### Setup
 
-- GitHub: [andrmhndr](https://github.com/andrmhndr)
-- Email: gandrainsan@yahoo.com
+```tsx
+// _app.tsx
+import { DialogProvider } from "@andrmhndr/cleankit";
+
+export default function App({ Component, pageProps }) {
+  return (
+    <DialogProvider>
+      <Component {...pageProps} />
+    </DialogProvider>
+  );
+}
+```
+
+### Usage
+
+```tsx
+import { useContext } from "react";
+import { DialogContext } from "@andrmhndr/cleankit";
+
+const MyComponent = () => {
+  const dialog = useContext(DialogContext);
+
+  const handleClick = async () => {
+    const result = await dialog?.openDialog({
+      content: (close) => (
+        <div>
+          <p>Are you sure?</p>
+          <button onClick={() => close(true)}>Yes</button>
+          <button onClick={() => close(false)}>No</button>
+        </div>
+      ),
+    });
+
+    console.log("Dialog result:", result);
+  };
+
+  return <button onClick={handleClick}>Show Dialog</button>;
+};
+```
 
 ---
 
-REMINDER!!
+## 🔗 useQueryParams
 
-Since some utilities like createContext are client-side only, remember to:
+Manage URL query params with ease (works with Next.js and React Router).
 
-- Add 'use client'; directive at the top of your React components using these utils
-- Avoid calling them directly in Server Components
+```tsx
+import { useQueryParams } from "@andrmhndr/cleankit";
+
+const { getOne, setQuery, removeQuery, clearQuery } = useQueryParams();
+
+getOne("search");
+setQuery({ search: "Next.js" });
+removeQuery("search");
+clearQuery();
+
+// With debounce
+setQuery({ search: "react" }, { debounce: 300 });
+```
+
+> ⚠️ For Next.js, make sure your `useQueryParams` imports from `@andrmhndr/cleankit/next` instead of base package.
 
 ---
 
-Thanks for checking out andr-utils ready to power your projects!
+## 🕒 debounce
+
+```ts
+import { debounce } from "@andrmhndr/cleankit";
+
+const log = debounce((val: string) => console.log(val), 500);
+
+log("Hello world");
+```
+
+---
+
+## 📅 formatDate
+
+```ts
+import { formatDate } from "@andrmhndr/cleankit";
+
+formatDate(new Date()); // default
+formatDate(new Date(), { style: "short" });
+formatDate(new Date(), {
+  locale: "id-ID",
+  format: "EEEE, dd MMM yyyy",
+});
+```
+
+---
+
+## 🧹 cleanObject & cleanList
+
+Clean out unwanted values from data objects and arrays.
+
+### 🧼 `cleanObject`
+
+Removes `null`, `undefined`, and empty string `""` values from an object.
+
+```ts
+import { cleanObject } from "@andrmhndr/cleankit";
+
+const cleaned = cleanObject({
+  name: "Felicia",
+  age: null,
+  email: "",
+  location: undefined,
+});
+// => { name: "Felicia" }
+```
+
+### 🧼 `cleanList`
+
+Removes `null`, `undefined`, empty strings `""`, and empty arrays `[]`. Optionally inserts a spacer between items.
+
+```ts
+import { cleanList } from "@andrmhndr/cleankit";
+
+const cleaned = cleanList([null, "React", "", [], "Next.js", undefined]);
+// => ["React", "Next.js"]
+
+const spaced = cleanList(["A", "B", "C"], (i) => <hr key={i} />);
+// => ["A", <hr />, "B", <hr />, "C"]
+```
+
+---
+
+## 📖 License
+
+MIT — Use it, love it, and make something beautiful.  
+And remember... **clean code is sexy code** 😘
