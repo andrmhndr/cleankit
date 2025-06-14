@@ -1,10 +1,10 @@
 {
   "name": "@andrmhndr/cleankit",
   "description": "A lightweight React utility kit for those who want to be clean.",
-  "version": "0.0.29",
-  "main": "./dist/index.cjs",
-  "module": "./dist/index.mjs",
-  "types": "./dist/index.d.ts",
+  "version": "0.0.30",
+  "main": "dist/index.cjs",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
   "exports": {
     ".": {
       "import": "./dist/index.mjs",
@@ -28,7 +28,10 @@
     }
   },
   "files": [
-    "dist"
+    "dist",
+    "dist/next",
+    "dist/react",
+    "dist/server"
   ],
   "scripts": {
     "build": "tsup --config tsup.config.ts"
