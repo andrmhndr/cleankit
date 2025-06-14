@@ -1,7 +1,7 @@
 {
   "name": "@andrmhndr/cleankit",
   "description": "A lightweight React utility kit for those who want to be clean.",
-  "version": "0.0.28",
+  "version": "0.0.29",
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
