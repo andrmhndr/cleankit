@@ -1,30 +1,30 @@
 {
   "name": "@andrmhndr/cleankit",
   "description": "A lightweight React utility kit for those who want to be clean.",
-  "version": "0.0.32",
+  "version": "0.0.33",
   "main": "dist/index.cjs",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "exports": {
     ".": {
+      "types": "./dist/index.d.ts",
       "import": "./dist/index.mjs",
-      "require": "./dist/index.cjs",
-      "types": "./dist/index.d.ts"
+      "require": "./dist/index.cjs"
     },
     "./server": {
+      "types": "./dist/server/index.d.ts",
       "import": "./dist/server/index.mjs",
-      "require": "./dist/server/index.cjs",
-      "types": "./dist/server/index.d.ts"
+      "require": "./dist/server/index.cjs"
     },
     "./react": {
+      "types": "./dist/react/index.d.ts",
       "import": "./dist/react/index.mjs",
-      "require": "./dist/react/index.cjs",
-      "types": "./dist/react/index.d.ts"
+      "require": "./dist/react/index.cjs"
     },
     "./next": {
+      "types": "./dist/next/index.d.ts",
       "import": "./dist/next/index.mjs",
-      "require": "./dist/next/index.cjs",
-      "types": "./dist/next/index.d.ts"
+      "require": "./dist/next/index.cjs"
     }
   },
   "files": [
@@ -54,9 +54,9 @@
     "@types/node": "^22.15.29",
     "@types/react": "^19.1.6",
     "@types/react-dom": "^19.1.5",
+    "next": "^13.5.11",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "next": "^13.5.11",
     "react-router-dom": "^6.12.1",
     "tsup": "^8.5.0",
     "typescript": "^5.8.3"
