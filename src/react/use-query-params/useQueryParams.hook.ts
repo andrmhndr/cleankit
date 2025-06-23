@@ -60,9 +60,9 @@ export const useQueryParams = <
    */
   const setQuery = (
     param: Partial<Record<K, QueryParamsInterface[K]>> = {},
-    options: { debounce?: number } = {}
+    options?: { delay?: number }
   ) => {
-    const delay = options.debounce;
+    const { delay } = options;
 
     if (delay) {
       if (!debounceMap.current[delay]) {

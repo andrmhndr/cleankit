@@ -38,7 +38,7 @@ export type UseQueryInterface<K extends string = string> = {
    */
   setQuery: (
     param: Partial<Record<K, QueryParamsInterface[K]>>,
-    options: { debounce?: number }
+    options?: { delay?: number }
   ) => void;
 
   /**
