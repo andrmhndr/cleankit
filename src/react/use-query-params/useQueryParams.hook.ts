@@ -57,6 +57,9 @@ export const useQueryParams = <
 
   /**
    * Set or update query parameters with optional debounce.
+   *
+   * @param {Partial<Record<K, QueryParamsInterface[K]>>} param - Query parameters to update.
+   * @param {{ delay?: number }} [options] - Optional debounce delay in milliseconds.
    */
   const setQuery = (
     param: Partial<Record<K, QueryParamsInterface[K]>> = {},

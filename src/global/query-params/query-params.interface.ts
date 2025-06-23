@@ -32,8 +32,8 @@ export type UseQueryInterface<K extends string = string> = {
   /**
    * Sets one or more query parameters.
    *
-   * @param param - An object representing the query parameters to set.
-   * @param options - Optional settings:
+   * @param {Partial<Record<K, QueryParamsInterface[K]>>} param - Query parameters to update.
+   * @param {{ delay?: number }} [options] - Optional debounce delay in milliseconds.
    *   - debounce: Delay in milliseconds before applying the update.
    */
   setQuery: (
